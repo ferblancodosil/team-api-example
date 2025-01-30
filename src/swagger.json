@@ -1,0 +1,30 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "API de ejemplo con Express",
+      "version": "1.0.0",
+      "title": "API de Ping"
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths": {
+      "/ping": {
+        "get": {
+          "summary": "Devuelve un mensaje de pong",
+          "responses": {
+            "200": {
+              "description": "Respuesta exitosa",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
