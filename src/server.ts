@@ -1,7 +1,7 @@
 // src/server.ts
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './swagger.json'; // Asegúrate de tener un archivo swagger.json
+import swaggerDocument from './swagger.json';
 import pingRoutes from './routes/pingRoutes';
 
 const app = express();

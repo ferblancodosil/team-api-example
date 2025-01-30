@@ -7,7 +7,9 @@
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true, // Añadir esta línea
+    "isolatedModules": true // Opcional, pero recomendado
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
