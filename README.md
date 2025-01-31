@@ -85,7 +85,7 @@ The API connects to the PostgreSQL database using the following connection strin
 
 ### API Documentation
 
-You can access the API documentation via Swagger at:
+You can access the API documentation and test the endpoints via Swagger at:
 
 http://localhost:3000/api-docs
 
