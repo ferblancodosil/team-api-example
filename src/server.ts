@@ -3,6 +3,7 @@ import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger.json';
 import pingRoutes from './routes/pingRoutes';
+import playerRoutes from './routes/playerRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Rutas
 app.use('/ping', pingRoutes);
+app.use('/players', playerRoutes); // Usar las rutas de jugadores
+
 
 // Manejo de errores
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

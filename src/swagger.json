@@ -1,30 +1,106 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "description": "API de ejemplo con Express",
-      "version": "1.0.0",
-      "title": "API de Ping"
+  "swagger": "2.0",
+  "info": {
+    "description": "API de ejemplo con Express",
+    "version": "1.0.0",
+    "title": "API de Ping y Jugadores"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Players",
+      "description": "Operations related to players"
     },
-    "host": "localhost:3000",
-    "basePath": "/",
-    "paths": {
-      "/ping": {
-        "get": {
-          "summary": "Devuelve un mensaje de pong",
-          "responses": {
-            "200": {
-              "description": "Respuesta exitosa",
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "message": {
-                    "type": "string"
-                  }
+    {
+      "name": "Ping",
+      "description": "Operations related to ping"
+    }
+  ],
+  "paths": {
+    "/ping": {
+      "get": {
+        "summary": "Devuelve un mensaje de pong",
+        "tags": ["Ping"],
+        "responses": {
+          "200": {
+            "description": "Respuesta exitosa",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
                 }
               }
             }
           }
         }
       }
+    },
+    "/players": {
+      "post": {
+        "summary": "Registrar un nuevo jugador",
+        "description": "Crea un nuevo jugador sin pertenecer a un club.",
+        "tags": ["Players"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "birthYear": {
+                  "type": "integer"
+                }
+              },
+              "required": ["firstName", "lastName", "birthYear"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Jugador creado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Player"
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Player": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "birthYear": {
+          "type": "integer"
+        },
+        "clubId": {
+          "type": "integer"
+        }
+      }
     }
   }
+}
