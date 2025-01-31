@@ -3,7 +3,7 @@
   "info": {
     "description": "API de ejemplo con Express",
     "version": "1.0.0",
-    "title": "API de Ping y Jugadores"
+    "title": "API de Ping, Jugadores y Entrenadores"
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -13,8 +13,8 @@
       "description": "Operations related to players"
     },
     {
-      "name": "Clubs",
-      "description": "Operations related to clubs"
+      "name": "Coaches",
+      "description": "Operations related to coaches"
     },
     {
       "name": "Ping",
@@ -90,11 +90,11 @@
         }
       }
     },
-    "/clubs": {
+    "/coaches": {
       "post": {
-        "summary": "Registrar un nuevo club",
-        "description": "Crea un nuevo club con un presupuesto.",
-        "tags": ["Clubs"],
+        "summary": "Registrar un nuevo entrenador",
+        "description": "Crea un nuevo entrenador sin pertenecer a un club.",
+        "tags": ["Coaches"],
         "parameters": [
           {
             "name": "body",
@@ -103,25 +103,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "firstName": {
                   "type": "string"
                 },
-                "city": {
+                "lastName": {
                   "type": "string"
                 },
-                "budget": {
+                "salary": {
                   "type": "number"
                 }
               },
-              "required": ["name", "city", "budget"]
+              "required": ["firstName", "lastName", "salary"]
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Club creado exitosamente",
+            "description": "Entrenador creado exitosamente",
             "schema": {
-              "$ref": "#/definitions/Club"
+              "$ref": "#/definitions/Coach"
             }
           },
           "400": {
@@ -158,20 +158,23 @@
         }
       }
     },
-    "Club": {
+    "Coach": {
       "type": "object",
       "properties": {
         "id": {
           "type": "integer"
         },
-        "name": {
+        "firstName": {
           "type": "string"
         },
-        "city": {
+        "lastName": {
           "type": "string"
         },
-        "budget": {
+        "salary": {
           "type": "number"
+        },
+        "clubId": {
+          "type": "integer"
         }
       }
     }
