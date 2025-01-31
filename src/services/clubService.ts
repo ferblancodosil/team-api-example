@@ -2,6 +2,20 @@ import prisma from '../db/prisma';
 import { ClubModel } from '../models';
 import { PlayerModel } from '../models';
 
+export const createClub = async (name: string, city: string, budget: number): Promise<ClubModel> => {
+    const club = await prisma.club.create({
+        data: {
+            name,
+            city,
+            budget,
+        },
+    });
+    if (!club) {
+        throw new Error('Club not created');
+    }
+    return club as ClubModel;
+};
+
 export const checkClubBudget = async (clubId: number, salary: number): Promise<ClubModel | undefined> => {
     if (!clubId) {
         return undefined;

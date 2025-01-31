@@ -17,6 +17,10 @@
       "description": "Operations related to coaches"
     },
     {
+      "name": "Clubs",
+      "description": "Operations related to clubs"
+    },
+    {
       "name": "Ping",
       "description": "Operations related to ping"
     }
@@ -132,6 +136,49 @@
           }
         }
       }
+    },
+    "/clubs": {
+      "post": {
+        "summary": "Registrar un nuevo club",
+        "description": "Crea un nuevo club con un presupuesto.",
+        "tags": ["Clubs"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "budget": {
+                  "type": "number"
+                }
+              },
+              "required": ["name", "city", "budget"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Club creado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Club"
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -175,6 +222,23 @@
         },
         "clubId": {
           "type": "integer"
+        }
+      }
+    },
+    "Club": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "budget": {
+          "type": "number"
         }
       }
     }

@@ -5,7 +5,7 @@ import swaggerDocument from './swagger.json';
 import pingRoutes from './routes/pingRoutes';
 import playerRoutes from './routes/playerRoutes';
 import coachRoutes from './routes/coachRoutes';
-
+import clubRoutes from './routes/clubRouter';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -19,6 +19,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/ping', pingRoutes);
 app.use('/players', playerRoutes);
 app.use('/coaches', coachRoutes);
+app.use('/clubs', clubRoutes);
 
 
 // Manejo de errores
