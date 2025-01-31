@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 import * as playerService from '../services/playerService';
 
 export const registerPlayer = async (req: Request, res: Response): Promise<void> => {
-    const { firstName, lastName, birthYear } = req.body;
+    const { firstName, lastName, birthYear, salary, clubId } = req.body;
 
     try {
-        const newPlayer = await playerService.createPlayer(firstName, lastName, birthYear);
+        const newPlayer = await playerService.createPlayer(firstName, lastName, birthYear, salary, clubId);
         res.status(201).json(newPlayer);
     } catch (error) {
         console.error(error);

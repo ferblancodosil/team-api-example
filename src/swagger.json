@@ -13,6 +13,10 @@
       "description": "Operations related to players"
     },
     {
+      "name": "Clubs",
+      "description": "Operations related to clubs"
+    },
+    {
       "name": "Ping",
       "description": "Operations related to ping"
     }
@@ -58,9 +62,15 @@
                 },
                 "birthYear": {
                   "type": "integer"
+                },
+                "salary": {
+                  "type": "number"
+                },
+                "clubId": {
+                  "type": "integer"
                 }
               },
-              "required": ["firstName", "lastName", "birthYear"]
+              "required": ["firstName", "lastName", "birthYear", "salary"]
             }
           }
         ],
@@ -69,6 +79,49 @@
             "description": "Jugador creado exitosamente",
             "schema": {
               "$ref": "#/definitions/Player"
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/clubs": {
+      "post": {
+        "summary": "Registrar un nuevo club",
+        "description": "Crea un nuevo club con un presupuesto.",
+        "tags": ["Clubs"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "budget": {
+                  "type": "number"
+                }
+              },
+              "required": ["name", "city", "budget"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Club creado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Club"
             }
           },
           "400": {
@@ -97,8 +150,28 @@
         "birthYear": {
           "type": "integer"
         },
+        "salary": {
+          "type": "number"
+        },
         "clubId": {
           "type": "integer"
+        }
+      }
+    },
+    "Club": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "budget": {
+          "type": "number"
         }
       }
     }

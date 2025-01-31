@@ -31,6 +31,7 @@ model Club {
   id        Int       @id @default(autoincrement())
   name      String
   city      String
+  budget    Float     // Presupuesto del club
   players   Player[]  @relation("ClubPlayers")
   coaches   Coach[]   @relation("ClubCoaches")
 }
@@ -40,6 +41,7 @@ model Player {
   firstName      String
   lastName       String
   birthYear      Int
+  salary         Float    // Salario del jugador
   clubId         Int?     // Relación opcional con Club
   club           Club?    @relation("ClubPlayers", fields: [clubId], references: [id])
 }
@@ -48,6 +50,7 @@ model Coach {
   id        Int      @id @default(autoincrement())
   firstName String
   lastName  String
+  salary    Float    // Salario del entrenador
   clubId    Int?     // Relación opcional con Club
   club      Club?    @relation("ClubCoaches", fields: [clubId], references: [id])
 }

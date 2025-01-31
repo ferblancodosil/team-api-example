@@ -37,11 +37,12 @@ async function main() {
             role: UserRole.COACH,
         },
     });
-    // Crear clubes
+    // Crear clubes con presupuesto
     const club1 = await prisma.club.create({
         data: {
             name: 'Club Deportivo Ejemplo 1',
             city: 'Ciudad Ejemplo 1',
+            budget: 100000, // Presupuesto inicial
         },
     });
 
@@ -49,15 +50,17 @@ async function main() {
         data: {
             name: 'Club Deportivo Ejemplo 2',
             city: 'Ciudad Ejemplo 2',
+            budget: 150000, // Presupuesto inicial
         },
     });
 
-    // Crear jugadores
+    // Crear jugadores con salario
     const player1 = await prisma.player.create({
         data: {
             firstName: 'Juan',
             lastName: 'Pérez',
             birthYear: 1995,
+            salary: 30000, // Salario del jugador
             clubId: club1.id, // Relacionar con el club 1
         },
     });
@@ -67,6 +70,7 @@ async function main() {
             firstName: 'María',
             lastName: 'Gómez',
             birthYear: 1998,
+            salary: 25000, // Salario del jugador
             clubId: club2.id, // Relacionar con el club 2
         },
     });
@@ -76,15 +80,17 @@ async function main() {
             firstName: 'Carlos',
             lastName: 'López',
             birthYear: 2000,
+            salary: 20000, // Salario del jugador
             // No se relaciona con ningún club
         },
     });
 
-    // Crear entrenadores
+    // Crear entrenadores con salario
     const coach1 = await prisma.coach.create({
         data: {
             firstName: 'Luis',
             lastName: 'Martínez',
+            salary: 50000, // Salario del entrenador
             clubId: club1.id, // Relacionar con el club 1
         },
     });
@@ -93,6 +99,7 @@ async function main() {
         data: {
             firstName: 'Ana',
             lastName: 'Fernández',
+            salary: 45000, // Salario del entrenador
             // No se relaciona con ningún club
         },
     });

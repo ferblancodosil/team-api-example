@@ -1,6 +1,6 @@
 import { UserRole } from '@prisma/client';
 
-export interface User {
+export interface UserModel {
     id: number;
     name: string;
     email: string;
@@ -8,23 +8,26 @@ export interface User {
     role: UserRole;
 }
 
-export interface Club {
+export interface ClubModel {
     id: number;
     name: string;
     city: string;
+    budget: number; // Presupuesto del club
 }
 
-export interface Player {
+export interface PlayerModel {
     id: number;
     firstName: string;
     lastName: string;
     birthYear: number;
+    salary: number; // Salario del jugador
     clubId?: number; // Relación opcional con Club
 }
 
-export interface Coach {
+export interface CoachModel {
     id: number;
     firstName: string;
     lastName: string;
+    salary: number; // Salario del entrenador
     clubId?: number; // Relación opcional con Club
 }
