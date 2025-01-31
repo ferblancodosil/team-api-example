@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Comando para iniciar la aplicación
-CMD ["sh", "-c", "yarn run migrate && yarn run seed && yarn run build && node dist/server.js"]
+CMD ["sh", "-c", "yarn generate && yarn run migrate && yarn run seed && yarn run build && node dist/server.js"]

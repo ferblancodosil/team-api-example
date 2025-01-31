@@ -89,11 +89,6 @@ You can access the API documentation via Swagger at:
 
 http://localhost:3000/api-docs
 
-
-### Endpoints
-
-- **GET /ping**: Returns a simple JSON response.
-
 ### Linting
 
 To check the code for linting issues, run:
@@ -101,6 +96,24 @@ To check the code for linting issues, run:
 ```bash
 yarn lint
 ```
+
+### API Integration Tests
+
+To check the API integration, run:
+
+```bash
+yarn test
+```
+
 ### License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## TODO
+
+- Add more tests
+- Add more endpoints
+- Security with JWT
+- Add middleware to validate the user is logged in
+- Add more error handling
+- Add more logging

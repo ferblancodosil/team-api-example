@@ -1,11 +1,15 @@
-import { UserRole } from '@prisma/client';
+export enum UserRoleModel {
+    CLUB = 'CLUB',
+    PLAYER = 'PLAYER',
+    COACH = 'COACH'
+}
 
 export interface UserModel {
     id: number;
     name: string;
     email: string;
     password: string;
-    role: UserRole;
+    role: UserRoleModel;
 }
 
 export interface ClubModel {
