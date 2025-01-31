@@ -7,8 +7,8 @@ export const registerPlayer = async (req: Request, res: Response): Promise<void>
     try {
         const newPlayer = await playerService.createPlayer(firstName, lastName, birthYear, salary);
         res.status(201).json(newPlayer);
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(400).json({ message: error.message });
     }
 };

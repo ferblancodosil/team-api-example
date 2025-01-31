@@ -7,8 +7,8 @@ export const registerCoach = async (req: Request, res: Response): Promise<void> 
     try {
         const newCoach = await coachService.createCoach(firstName, lastName, salary);
         res.status(201).json(newCoach);
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(400).json({ message: error.message });
     }
 };

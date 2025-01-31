@@ -7,9 +7,9 @@ export const registerClub = async (req: Request, res: Response): Promise<void> =
     try {
         const newClub = await clubService.createClub(name, city, budget);
         res.status(201).json(newClub);
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -19,9 +19,9 @@ export const modifyClubBudget = async (req: Request, res: Response): Promise<voi
     try {
         const updatedClub = await clubService.updateClubBudget(clubId, newBudget);
         res.status(200).json(updatedClub);
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -31,9 +31,9 @@ export const addPlayer = async (req: Request, res: Response): Promise<void> => {
     try {
         await clubService.addPlayerToClub(clubId, playerId);
         res.status(200).json({ message: 'Player added to club successfully' });
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -43,9 +43,9 @@ export const removePlayer = async (req: Request, res: Response): Promise<void> =
     try {
         await clubService.removePlayerFromClub(Number(playerId));
         res.status(200).json({ message: 'Player removed from club successfully' });
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -55,9 +55,9 @@ export const addCoach = async (req: Request, res: Response): Promise<void> => {
     try {
         await clubService.addCoachToClub(clubId, coachId);
         res.status(200).json({ message: 'Coach added to club successfully' });
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -67,9 +67,9 @@ export const removeCoach = async (req: Request, res: Response): Promise<void> =>
     try {
         await clubService.removeCoachFromClub(Number(coachId));
         res.status(200).json({ message: 'Coach removed from club successfully' });
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(400).json({ message: error.message });
     }
 };
 
@@ -85,8 +85,8 @@ export const getPlayersInClub = async (req: Request, res: Response): Promise<voi
             Number(pageSize) || 10
         );
         res.status(200).json(players);
-    } catch (error) {
+    } catch (error: any) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        res.status(400).json({ message: error.message });
     }
 };

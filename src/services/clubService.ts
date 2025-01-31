@@ -84,9 +84,8 @@ const handleEmployerClubOperation = async (
     if (operation === 'add' && clubId) {
         await checkClubBudget(clubId, employer.salary);
     }
-
     // Actualizar el club del empleado
-    const newValue = await models[type].update({
+    await models[type].update({
         where: { id: employer.id },
         data: { clubId },
     });
