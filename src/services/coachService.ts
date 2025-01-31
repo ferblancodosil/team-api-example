@@ -7,11 +7,12 @@ export const createCoach = async (firstName: string, lastName: string, salary: n
             firstName,
             lastName,
             salary,
-            clubId: null, // No se relaciona con ningún club
+            clubId: null,
         },
     });
     if (!coach) {
         throw new Error('Coach not created');
     }
+
     return coach as CoachModel;
 };

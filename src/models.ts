@@ -15,19 +15,19 @@ export interface ClubModel {
     budget: number; // Presupuesto del club
 }
 
-export interface PlayerModel {
+export interface ClubEmployerModel {
     id: number;
-    firstName: string;
-    lastName: string;
-    birthYear: number;
-    salary: number; // Salario del jugador
+    salary: number; // Salario del jugador o entrenador
     clubId?: number; // Relación opcional con Club
 }
 
-export interface CoachModel {
-    id: number;
+
+export interface PlayerModel extends ClubEmployerModel {
     firstName: string;
     lastName: string;
-    salary: number; // Salario del entrenador
-    clubId?: number; // Relación opcional con Club
+}
+
+export interface CoachModel extends ClubEmployerModel {
+    firstName: string;
+    lastName: string;
 }

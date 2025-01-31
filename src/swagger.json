@@ -26,25 +26,7 @@
     }
   ],
   "paths": {
-    "/ping": {
-      "get": {
-        "summary": "Devuelve un mensaje de pong",
-        "tags": ["Ping"],
-        "responses": {
-          "200": {
-            "description": "Respuesta exitosa",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
+
     "/players": {
       "post": {
         "summary": "Registrar un nuevo jugador",
@@ -69,9 +51,6 @@
                 },
                 "salary": {
                   "type": "number"
-                },
-                "clubId": {
-                  "type": "integer"
                 }
               },
               "required": ["firstName", "lastName", "birthYear", "salary"]
@@ -137,6 +116,59 @@
         }
       }
     },
+
+    "/clubs/{clubId}/players": {
+      "get": {
+        "summary": "Listar jugadores de un club",
+        "description": "Obtiene una lista de jugadores de un club con posibilidad de filtrar y paginar.",
+        "tags": ["Clubs"],
+        "parameters": [
+          {
+            "name": "clubId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de jugadores obtenida exitosamente",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Player"
+              }
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
     "/clubs": {
       "post": {
         "summary": "Registrar un nuevo club",
@@ -170,6 +202,172 @@
             "schema": {
               "$ref": "#/definitions/Club"
             }
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/clubs/budget": {
+      "put": {
+        "summary": "Modificar el presupuesto de un club",
+        "description": "Actualiza el presupuesto de un club existente.",
+        "tags": ["Clubs"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clubId": {
+                  "type": "integer"
+                },
+                "newBudget": {
+                  "type": "number"
+                }
+              },
+              "required": ["clubId", "newBudget"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Presupuesto actualizado exitosamente",
+            "schema": {
+              "$ref": "#/definitions/Club"
+            }
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/clubs/players": {
+      "post": {
+        "summary": "Añadir un jugador a un club",
+        "description": "Asocia un jugador a un club.",
+        "tags": ["Clubs"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clubId": {
+                  "type": "integer"
+                },
+                "playerId": {
+                  "type": "integer"
+                }
+              },
+              "required": ["clubId", "playerId"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Jugador añadido al club exitosamente"
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/clubs/players/{playerId}": {
+      "delete": {
+        "summary": "Quitar un jugador de un club",
+        "description": "Desasocia un jugador de un club.",
+        "tags": ["Clubs"],
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Jugador eliminado del club exitosamente"
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/clubs/coaches": {
+      "post": {
+        "summary": "Añadir un entrenador a un club",
+        "description": "Asocia un entrenador a un club.",
+        "tags": ["Clubs"],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clubId": {
+                  "type": "integer"
+                },
+                "coachId": {
+                  "type": "integer"
+                }
+              },
+              "required": ["clubId", "coachId"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entrenador añadido al club exitosamente"
+          },
+          "400": {
+            "description": "Error de validación"
+          },
+          "500": {
+            "description": "Error interno del servidor"
+          }
+        }
+      }
+    },
+    "/clubs/coaches/{coachId}": {
+      "delete": {
+        "summary": "Quitar un entrenador de un club",
+        "description": "Desasocia un entrenador de un club.",
+        "tags": ["Clubs"],
+        "parameters": [
+          {
+            "name": "coachId",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entrenador eliminado del club exitosamente"
           },
           "400": {
             "description": "Error de validación"
